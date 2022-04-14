@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import {Route, Routes} from 'react-router-dom'
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Box } from "@mui/material";
+import { Context } from "./context";
+import Home from "./pages/Home";
+import CoinDetail from "./pages/CoinDetail";
+import Header from './components/Header'
 
-function App() {
+
+
+
+export default function App() {
+
+
+  const { mode } = useContext(Context);
+
+  const theme = createTheme({
+    palette: {
+      mode
+    },
+  });
+
+
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          bgcolor: "background.default",
+          color: "text.primary",
+          minHeight:"100vh"
+        }}
+      ><Header  />
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/:id" element={<CoinDetail/>}/>
+        </Routes>
+      </Box>
+    </ThemeProvider>
   );
 }
-
-export default App;
