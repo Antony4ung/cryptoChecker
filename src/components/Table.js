@@ -113,10 +113,11 @@ export default function TableCom() {
                     >
                       {item.price_change_percentage_24h}
                     </TableCell>
-                    <TableCell align="center">
-                      {item.market_cap.toString().slice(0, -6)}
+{item?.market_cap && <TableCell align="center">
+                      {item?.market_cap?.toString().slice(0, -6)}
                       {symbol}
                     </TableCell>
+}
                   </TableRow>
                 );
               })}
